@@ -1,11 +1,12 @@
-import UserProfileForm from './components/AuthForm/userProfileForm.js';
-import Chat from "./components/Chat/Chat.js";
+import {Route,Routes} from "react-router";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 function App() {
   return (
     <div className="App">
-      {/* <UserProfileForm /> */}
-      <Chat roomId="TEST_ROOM_12345" senderId="user1" nickname="Tester" />
+      <Routes>
+        <Route exact path="/" element={<LandingPage />}/>
+      </Routes>
     </div>
   );
 }

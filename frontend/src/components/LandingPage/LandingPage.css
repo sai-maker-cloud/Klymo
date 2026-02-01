@@ -1,0 +1,47 @@
+.klymo-wrapper {
+  background-color: #000;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.layout-grid {
+  display: flex;
+  width: 100%;
+}
+
+.info-side {
+  flex: 1.2;
+  padding: 40px 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: radial-gradient(circle at 0% 0%, #1a1a2e 0%, #000 100%);
+}
+
+.action-side {
+  flex: 0.8;
+  background-color: #050505;
+  border-left: 1px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 900px) {
+  .layout-grid {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .info-side {
+    padding: 60px 20px;
+    text-align: center;
+    align-items: center;
+  }
+  .action-side {
+    border-left: none;
+    border-top: 1px solid #111;
+  }
+}

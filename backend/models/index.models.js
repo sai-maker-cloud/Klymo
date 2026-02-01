@@ -1,4 +1,4 @@
-const Message = require("./message.models");
+const Users = require("./users.models");
 const Chat = require("./chat.models");
 
-module.exports = {Message,Chat};
+module.exports = {Chat,Users};

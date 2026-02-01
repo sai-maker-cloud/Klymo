@@ -1,0 +1,30 @@
+.hero-content { margin-bottom: 50px; }
+.trust-badge {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.hero-title {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: clamp(2.5rem, 5vw, 5rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  color: #fff;
+}
+.gradient-highlight {
+  background: linear-gradient(to right, #6366f1, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-description {
+  color: #94a3b8 !important;
+  font-size: 1.1rem !important;
+  max-width: 480px;
+  margin-top: 20px !important;
+}

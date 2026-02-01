@@ -1,0 +1,18 @@
+.form-card { width: 100%; max-width: 360px; text-align: center; }
+.flow-label { font-size: 10px !important; font-weight: 800 !important; color: #6366f1 !important; margin-bottom: 25px !important; letter-spacing: 2px; }
+.webcam-container {
+  position: relative;
+  width: min(70vw, 200px);
+  height: min(70vw, 200px);
+  margin: 0 auto 30px;
+  border: 2px solid #222;
+  border-radius: 40px;
+  overflow: hidden;
+  background: #111;
+}
+.cam-view { width: 100%; height: 100%; object-fit: cover; }
+.capture-fab { position: absolute; bottom: 8px; right: 8px; background: #6366f1 !important; color: #fff !important; }
+.mui-input { background: #0f0f0f !important; margin-bottom: 12px !important; padding: 12px 18px !important; border-radius: 12px !important; }
+.mui-input input, .mui-input textarea { color: #fff !important; }
+.btn-join { background: #6366f1 !important; color: #fff !important; padding: 16px !important; border-radius: 12px !important; font-weight: 700 !important; }
+.security-note { font-size: 10px !important; color: #444 !important; margin-top: 15px !important; }

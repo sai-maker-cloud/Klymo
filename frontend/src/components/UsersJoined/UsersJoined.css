@@ -1,0 +1,5 @@
+.proof-container { margin-top: 20px; }
+.proof-header { font-size: 10px !important; color: #444 !important; font-weight: 800 !important; letter-spacing: 2px; }
+.avatar-row { display: flex; align-items: center; margin-top: 10px; }
+.mui-avatar-group .MuiAvatar-root { width: 32px !important; height: 32px !important; border: 2px solid #000 !important; }
+.proof-text { color: #64748b !important; font-size: 0.85rem !important; margin-left: 12px !important; }
