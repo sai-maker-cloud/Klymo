@@ -39,12 +39,6 @@ io.on("connection", (socket) => {
         QueueMatchmaking.addUser(socket);
     });
 
-    socket.on("send_message", (data) => {
-        if (data.roomId) {
-            socket.to(data.roomId).emit("receive_message", data);
-        }
-    });
-
     socket.on("requeue", () => {
         console.log(`User ${socket.id} requested new match`);
         QueueMatchmaking.deleteUser(socket);

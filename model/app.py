@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import cloudinary
 import cloudinary.uploader
-from transformers import AutoImageProcessor, SiglipForImageClassification
+from transformers import AutoImageProcessor, AutoModelForImageClassification
 
 app = Flask(__name__)
 CORS(app)
@@ -19,15 +19,8 @@ cloudinary.config(
   secure = True
 )
 
-# cloudinary.config( 
-#     cloud_name = os.environ.get("CLOUDINARY_NAME"), 
-#     api_key = os.environ.get("CLOUDINARY_KEY"), 
-#     api_secret = os.environ.get("CLOUDINARY_SECRET"),
-#     secure = True
-# )
-
 MODEL_NAME = "prithivMLmods/Realistic-Gender-Classification"
-model = SiglipForImageClassification.from_pretrained(MODEL_NAME)
+model = AutoModelForImageClassification.from_pretrained(MODEL_NAME)
 processor = AutoImageProcessor.from_pretrained(MODEL_NAME)
 
 @app.route('/classify', methods=['POST'])

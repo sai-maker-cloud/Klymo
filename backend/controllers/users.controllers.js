@@ -1,37 +1,57 @@
-const {UserServices} = require("../services/index.services");
+const { UserServices } = require("../services/index.services");
+const {User} = require("../models/index.models");
+const cloudinary = require('cloudinary').v2;
 
 const addUser = async (req, res) => {
     try {
-        const userData = req.body; 
-        if (!userData || Object.keys(userData).length === 0) {
-            return res.status(400).json({ success: false, message: 'User data is missing' });
+        const { username, bio, gender, interests, avatarUrl } = req.body;
+
+        const newUser = new User({
+            username,
+            bio,
+            gender,
+            interests
+        });
+
+        if (avatarUrl) {
+            const uploadRes = await cloudinary.uploader.upload(avatarUrl, {
+                folder: "aegis_avatars",
+                public_id: `avatar_${newUser._id}`,
+                overwrite: true
+            });
+            newUser.avatar = uploadRes.secure_url;
         }
 
-        await UserServices.addUser(userData);
-
-        return res.status(201).json({ success: true, message: 'User registered successfully' });
-    } catch (err) {
-        console.error("Controller Error:", err); 
-        return res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
+        const savedUser = await newUser.save();
+        res.status(201).json(savedUser);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 }
 
 const deleteUser = async (req, res) => {
     try {
-        const userData = req.body; 
+        const userData = req.body;
+        const userId = userData._id || userData.id;
 
-        if (!userData || Object.keys(userData).length === 0) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'User data required for deletion' 
+        if (!userId) {
+            return res.status(400).json({
+                success: false,
+                message: 'User ID required for deletion'
             });
+        }
+
+        try {
+            await cloudinary.uploader.destroy(`aegis_avatars/avatar_${userId}`);
+        } catch (cloudErr) {
+            console.error("Cloudinary Delete Warning:", cloudErr);
         }
 
         await UserServices.deleteUser(userData);
 
-        return res.status(200).json({ 
-            success: true, 
-            message: 'User deleted successfully' 
+        return res.status(200).json({
+            success: true,
+            message: 'User and assets deleted successfully'
         });
     } catch (err) {
         console.error("Delete Error:", err);
@@ -39,4 +59,4 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = {addUser,deleteUser};
+module.exports = { addUser, deleteUser };

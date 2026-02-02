@@ -3,7 +3,7 @@ torch==2.1.1+cpu
 torchvision==0.16.1+cpu
 flask
 flask-cors
-transformers
+transformers>=4.34.0
 pillow
 requests
 cloudinary
