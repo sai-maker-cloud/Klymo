@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router"
 
 export const config = {
-  backendPoint: 'http://localhost:8082'
+  backendPoint: 'https://klymo.onrender.com'
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
