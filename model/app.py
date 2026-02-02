@@ -1,3 +1,4 @@
+import os
 import torch
 import requests
 from io import BytesIO
@@ -11,8 +12,6 @@ from transformers import AutoImageProcessor, SiglipForImageClassification
 app = Flask(__name__)
 CORS(app)
 
-# --- CONFIGURATION ---
-# Replace the API_KEY and API_SECRET with your actual strings from Cloudinary
 cloudinary.config( 
   cloud_name = "dpf9ahkft", 
   api_key = "715742843611293", 
@@ -28,13 +27,11 @@ processor = AutoImageProcessor.from_pretrained(MODEL_NAME)
 def classify():
     try:
         data = request.get_json()
-        print(f"Incoming Request: {data}") 
-
         image_url = data.get('url')
         public_id = data.get('public_id')
 
         if not image_url:
-            return jsonify({"error": "No URL provided"}), 
+            return jsonify({"error": "No URL provided"}), 400
 
         response = requests.get(image_url, timeout=10)
         img = Image.open(BytesIO(response.content)).convert("RGB")
@@ -45,20 +42,22 @@ def classify():
             probs = torch.nn.functional.softmax(outputs.logits, dim=1).squeeze().tolist()
 
         gender = "female" if probs[0] > probs[1] else "male"
-        print(f"Result: {gender}")
 
         if public_id:
             try:
                 cloudinary.uploader.destroy(public_id)
-                print(f"Cloudinary file deleted: {public_id}")
-            except Exception as e:
-                print(f"Cloudinary deletion failed (ignoring): {e}")
+            except:
+                pass
         
-        return jsonify({"gender": gender, "status": "success"})
+        return jsonify({
+            "gender": gender, 
+            "confidence": max(probs),
+            "status": "success"
+        })
 
     except Exception as e:
-        print(f"CRITICAL ERROR: {str(e)}")
-        return jsonify({"error": str(e)}), 
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
