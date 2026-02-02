@@ -41,10 +41,12 @@ frontend/out/
 frontend/.cache/
 frontend/npm-debug.log*
 
-# ========================
-# Tools & Coverage
-# ========================
-coverage/
-.nyc_output/
-.serverless/
-.terraform/
+# --- Backend Specific ---
+# In case you use local SQLite for testing
+backend/*.sqlite
+backend/*.db
+
+# Temporary images (Klymo rule: should be deleted, but let's ignore just in case)
+**/temp/
+**/uploads/
+gender_env/
