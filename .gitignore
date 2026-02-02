@@ -38,3 +38,4 @@ backend/*.db
 # Temporary images (Klymo rule: should be deleted, but let's ignore just in case)
 **/temp/
 **/uploads/
+gender_env/
