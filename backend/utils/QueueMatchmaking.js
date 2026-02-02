@@ -29,4 +29,4 @@ const QueueMatchmaking = {
     }
 }
 
-module.exports = {QueueMatchmaking: new QueueMatchmaking()};
+module.exports = {QueueMatchmaking};

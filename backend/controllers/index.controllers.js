@@ -1,4 +1,4 @@
-const MessageControllers = require("./messages.controllers");
+const UsersControllers = require("./users.controllers");
 const ChatControllers = require("./chats.controllers");
 
-module.exports = {MessageControllers,ChatControllers};
+module.exports = {ChatControllers,UsersControllers};
